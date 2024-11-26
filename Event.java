@@ -2,8 +2,8 @@ public class Event {
     private String eventName;
     private String eventDate;
     private String organizer;
-    private String category; // Event category
-    private int capacity;    // Maximum number of attendees
+    private String category; 
+    private int capacity;
 
     // Default Constructor
     public Event() {}
