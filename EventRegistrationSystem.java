@@ -43,7 +43,6 @@ public class EventRegistrationSystem {
         System.out.println("=========================");
         System.out.print("Enter your choice: ");
         System.out.println();
-
     }
 
     private static int getValidatedChoice(int maxOption) {
@@ -80,25 +79,49 @@ public class EventRegistrationSystem {
 
     private static void createEvent() {
         System.out.println("\n=== Create a New Event ===");
-        System.out.print("Enter event name: ");
-        System.out.println();
-        String name = scanner.nextLine();
-        System.out.print("Enter event date (YYYY-MM-DD): ");
-        System.out.println();
-        String date = scanner.nextLine();
-        while (!isValidDate(date)) {
-            System.out.print("Invalid date. Please enter again (YYYY-MM-DD): ");
+
+        String name;
+        do {
+            System.out.print("Enter event name (letters and spaces only): ");
+            System.out.println();
+            name = scanner.nextLine();
+            if (!isValidName(name)) {
+                System.out.println("Invalid name. Only letters and spaces are allowed.");
+            }
+        } while (!isValidName(name));
+
+        String date;
+        do {
+            System.out.print("Enter event date (YYYY-MM-DD): ");
+            System.out.println();
             date = scanner.nextLine();
-        }
-        System.out.print("Enter organizer: ");        
+            if (!isValidDate(date)) {
+                System.out.println("Invalid date. Please try again.");
+            }
+        } while (!isValidDate(date));
+
+        System.out.print("Enter organizer: ");
         System.out.println();
         String organizer = scanner.nextLine();
+
         System.out.print("Enter event category (e.g., Tech, Business): ");
         System.out.println();
         String category = scanner.nextLine();
-        System.out.print("Enter maximum capacity: ");
-        System.out.println();
-        int capacity = Integer.parseInt(scanner.nextLine());
+
+        int capacity;
+        do {
+            System.out.print("Enter maximum capacity (0-1000): ");
+            System.out.println();
+            try {
+                capacity = Integer.parseInt(scanner.nextLine());
+                if (!isValidCapacity(capacity)) {
+                    System.out.println("Invalid capacity. It must be between 0 and 1000.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Capacity must be a number.");
+                capacity = -1; 
+            }
+        } while (!isValidCapacity(capacity));
 
         Event event = new Event(name, date, organizer, category, capacity);
         events.add(event);
@@ -106,7 +129,6 @@ public class EventRegistrationSystem {
         System.out.println("Event created successfully!");
         System.out.println();
     }
-
     private static void displayEvents() {
         System.out.println("\n=== Available Events ===");
         if (events.isEmpty()) {
@@ -116,23 +138,22 @@ public class EventRegistrationSystem {
         for (Event event : events) {
             System.out.println(event);
         }
+        System.out.println();
     }
-
     private static void modifyOrDeleteEvent() {
         System.out.println("\n=== Modify or Delete Event ===");
-        System.out.println();
         System.out.print("Enter event name: ");
         System.out.println();
         String name = scanner.nextLine();
         Event event = findEventByName(name);
         if (event == null) {
             System.out.println("Event not found.");
+            System.out.println();
             return;
         }
+
         System.out.println("1. Modify Event");
-        System.out.println();
         System.out.println("2. Delete Event");
-        System.out.println();
         System.out.print("Enter your choice: ");
         System.out.println();
         int choice = Integer.parseInt(scanner.nextLine());
@@ -146,40 +167,51 @@ public class EventRegistrationSystem {
             System.out.println("Invalid choice.");
         }
     }
-
     private static void modifyEvent(Event event) {
         System.out.println("\n=== Modify Event ===");
+    
         System.out.print("Enter new name (leave blank to keep current): ");
-        System.out.println();
         String name = scanner.nextLine();
-        if (!name.isEmpty()) event.setEventName(name);
-
+        if (!name.isEmpty() && isValidName(name)) {
+            event.setEventName(name);
+        } else if (!name.isEmpty()) {
+            System.out.println("Invalid name. Only letters and spaces are allowed.");
+        }
+    
         System.out.print("Enter new date (YYYY-MM-DD, leave blank to keep current): ");
-        System.out.println();
         String date = scanner.nextLine();
         if (!date.isEmpty()) {
             while (!isValidDate(date)) {
-                System.out.print("Invalid date format. Please enter again (YYYY-MM-DD): ");
-                System.out.println();
+                System.out.print("Invalid date format or past date. Please enter again (YYYY-MM-DD): ");
                 date = scanner.nextLine();
             }
             event.setEventDate(date);
         }
-
+    
         System.out.print("Enter new category (leave blank to keep current): ");
-        System.out.println();
         String category = scanner.nextLine();
-        if (!category.isEmpty()) event.setCategory(category);
-
+        if (!category.isEmpty()) {
+            event.setCategory(category);
+        }
+    
         System.out.print("Enter new maximum capacity (leave blank to keep current): ");
-        System.out.println();
         String capacityInput = scanner.nextLine();
-        if (!capacityInput.isEmpty()) event.setCapacity(Integer.parseInt(capacityInput));
-
+        if (!capacityInput.isEmpty()) {
+            try {
+                int capacity = Integer.parseInt(capacityInput);
+                if (isValidCapacity(capacity)) {
+                    event.setCapacity(capacity);
+                } else {
+                    System.out.println("Invalid capacity. It must be between 0 and 1000.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Capacity must be a number.");
+            }
+        }
+    
         System.out.println("Event modified successfully.");
-        System.out.println();
     }
-
+    
     private static void registerAttendee() {
         System.out.print("\nEnter event name to register for: ");
         System.out.println();
@@ -192,15 +224,18 @@ public class EventRegistrationSystem {
         }
         if (eventAttendees.get(event).size() >= event.getCapacity()) {
             System.out.println("Event is full. Registration not possible.");
+            System.out.println();
             return;
         }
 
         System.out.print("Enter attendee name: ");
         System.out.println();
         String name = scanner.nextLine();
+
         System.out.print("Enter attendee email: ");
         System.out.println();
         String email = scanner.nextLine();
+
         while (!isValidEmail(email)) {
             System.out.print("Invalid email format. Please enter again: ");
             System.out.println();
@@ -253,6 +288,14 @@ public class EventRegistrationSystem {
             System.out.println("Invalid date format. Please use the format YYYY-MM-DD.");
             return false;
         }
+    }
+
+    private static boolean isValidName(String name) {
+        return name.matches("[a-zA-Z ]+");
+    }
+
+    private static boolean isValidCapacity(int capacity) {
+        return capacity >= 0 && capacity <= 1000;
     }
 
     private static boolean isValidEmail(String email) {
