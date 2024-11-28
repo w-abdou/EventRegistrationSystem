@@ -228,9 +228,12 @@ public class EventRegistrationSystem {
             return;
         }
 
-        System.out.print("Enter attendee name: ");
-        System.out.println();
-        String name = scanner.nextLine();
+        String name = null;
+        do {
+        System.out.println("Enter attendee name: ");
+        name = scanner.nextLine();
+        }
+        while (!(isValidName(name)));
 
         System.out.print("Enter attendee email: ");
         System.out.println();
