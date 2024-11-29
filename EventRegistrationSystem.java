@@ -100,13 +100,23 @@ public class EventRegistrationSystem {
             }
         } while (!isValidDate(date));
 
-        System.out.print("Enter organizer: ");
-        System.out.println();
+        
+        System.out.println("Enter organizer: ");
         String organizer = scanner.nextLine();
+        while (!(isValidName(organizer))) {
+            System.out.println("Invalid name. Only letters and spaces allowed");
+            organizer = scanner.nextLine();
+        }
+        
 
-        System.out.print("Enter event category (e.g., Tech, Business): ");
-        System.out.println();
-        String category = scanner.nextLine();
+        // possibly create list for event categories while making database. dont want category to be dog for example 
+        System.out.println("Enter event category (e.g., Tech, Business): ");       
+        String category = scanner.nextLine();; 
+        while (!(isValidName(category))) {
+            System.out.println("Invalid category. Only letters and spaces allowed");        
+            category = scanner.nextLine();
+        }
+        
 
         int capacity;
         do {
@@ -228,12 +238,14 @@ public class EventRegistrationSystem {
             return;
         }
 
-        String name = null;
-        do {
+        
         System.out.println("Enter attendee name: ");
-        name = scanner.nextLine();
+        String name = scanner.nextLine();
+        while (!(isValidName(name))) {
+            System.out.println("Invalid Name. Only letters and spaces");
+            name = scanner.nextLine();
         }
-        while (!(isValidName(name)));
+        
 
         System.out.print("Enter attendee email: ");
         System.out.println();
