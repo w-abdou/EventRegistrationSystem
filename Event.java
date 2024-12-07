@@ -2,13 +2,9 @@ public class Event {
     private String eventName;
     private String eventDate;
     private String organizer;
-    private String category; 
+    private String category;
     private int capacity;
 
-    // Default Constructor
-    public Event() {}
-
-    // Constructor with all attributes
     public Event(String eventName, String eventDate, String organizer, String category, int capacity) {
         this.eventName = eventName;
         this.eventDate = eventDate;
@@ -17,7 +13,6 @@ public class Event {
         this.capacity = capacity;
     }
 
-    // Getters and Setters
     public String getEventName() {
         return eventName;
     }
@@ -60,10 +55,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event Name: " + eventName +
-               ", Date: " + eventDate +
-               ", Organizer: " + organizer +
-               ", Category: " + category +
-               ", Capacity: " + capacity;
+        return "Event: " + eventName + ", Date: " + eventDate + ", Organizer: " + organizer +
+                ", Category: " + category + ", Capacity: " + capacity;
     }
 }

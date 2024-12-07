@@ -2,16 +2,11 @@ public class Attendee {
     private String name;
     private String email;
 
-    // Default Constructor
-    public Attendee() {}
-
-    // Constructor with name and email
     public Attendee(String name, String email) {
         this.name = name;
         this.email = email;
     }
 
-    // Getters and Setters
     public String getName() {
         return name;
     }
