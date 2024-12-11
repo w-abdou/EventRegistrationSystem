@@ -3,7 +3,7 @@ public class Workshop extends Event {
 
     // Constructor
     public Workshop(String eventName, String eventDate, String organizer, String category, int capacity, String topic) {
-        super(eventName, eventDate, organizer, category, capacity);
+        super(eventName, eventDate, organizer, category, capacity, ticketPrice);
         this.topic = topic;
     }
 
