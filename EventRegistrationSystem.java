@@ -154,7 +154,7 @@ public class EventRegistrationSystem {
 
     private static void createEvent() {
         System.out.println("\n=== Create a New Event ===");
-
+    
         String name;
         do {
             System.out.print("Enter event name (letters and spaces only): ");
@@ -163,7 +163,7 @@ public class EventRegistrationSystem {
                 System.out.println("Invalid name. Only letters and spaces are allowed.");
             }
         } while (!isValidName(name));
-
+    
         String date;
         do {
             System.out.print("Enter event date (YYYY-MM-DD): ");
@@ -172,14 +172,14 @@ public class EventRegistrationSystem {
                 System.out.println("Invalid date. Please try again.");
             }
         } while (!isValidDate(date));
-
+    
         System.out.print("Enter organizer: ");
         String organizer = scanner.nextLine();
         while (!isValidName(organizer)) {
             System.out.println("Invalid name. Only letters and spaces allowed.");
             organizer = scanner.nextLine();
         }
-
+    
         System.out.println("Choose a category:");
         for (int i = 0; i < VALID_CATEGORIES.size(); i++) {
             System.out.println((i + 1) + ". " + VALID_CATEGORIES.get(i));
@@ -198,7 +198,7 @@ public class EventRegistrationSystem {
                 System.out.println("Invalid input. Please enter a number.");
             }
         } while (category == null);
-
+    
         int capacity;
         do {
             System.out.print("Enter maximum capacity (0-1000): ");
@@ -212,14 +212,28 @@ public class EventRegistrationSystem {
                 capacity = -1;
             }
         } while (!isValidCapacity(capacity));
-
-        Event event = new Event (name, date, organizer, category, capacity);
-        events.add(event);
-        eventAttendees.put(event, new ArrayList<>());
-        System.out.println("Event created successfully!");
-    }
-
-    private static void displayEvents() {
+    
+        double ticketPrice;
+        do {
+            System.out.print("Enter ticket price: $");
+            try {
+                ticketPrice = Double.parseDouble(scanner.nextLine());
+                if (ticketPrice <= 0) {
+                    System.out.println("Invalid price. The ticket price must be greater than 0.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid price.");
+                ticketPrice = -1;
+            }
+        } while (ticketPrice <= 0);
+    
+        Event event = new Event (name, date, organizer, category, capacity, ticketPrice);
+                events.add(event);
+                eventAttendees.put(event, new ArrayList<>());
+                System.out.println("Event created successfully!");
+            }
+        
+            private static void displayEvents() {
         System.out.println("\n=== Available Events ===");
         if (events.isEmpty()) {
             System.out.println("No events available.");
@@ -312,6 +326,22 @@ public class EventRegistrationSystem {
                 System.out.println("Invalid input. Capacity must be a number.");
             }
         }
+        System.out.print("Enter new ticket price (leave blank to keep current): $");
+         String priceInput = scanner.nextLine();
+         if (!priceInput.isEmpty()) {
+            try {
+                double ticketPrice = Double.parseDouble(priceInput);
+                if (ticketPrice > 0) {
+                    event.setTicketPrice(ticketPrice);
+                    System.out.println("Ticket price updated to: $" + ticketPrice);
+                } else {
+                    System.out.println("Invalid input. Ticket price must be greater than 0.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid price.");
+            }
+    }
+
         System.out.println("Event modified successfully.");
     }
 
@@ -327,14 +357,14 @@ public class EventRegistrationSystem {
             System.out.println("Event is full. Registration not possible.");
             return;
         }
-
+    
         System.out.print("Enter attendee name: ");
         String name = scanner.nextLine();
         while (!isValidName(name)) {
             System.out.println("Invalid name. Only letters and spaces allowed.");
             name = scanner.nextLine();
         }
-
+    
         System.out.print("Enter attendee email: ");
         String email = scanner.nextLine();
         while (!isValidEmail(email)) {
@@ -342,11 +372,34 @@ public class EventRegistrationSystem {
             email = scanner.nextLine();
         }
 
-        Attendee attendee = new Attendee(name, email);
+        System.out.println("\nChoose attendee type:");
+        System.out.println("1. Normal Attendee");
+        System.out.println("2. VIP Attendee");
+        System.out.println("3. Premium Attendee");
+    
+        int attendeeTypeChoice = getValidatedChoice(3);
+        Attendee attendee = null;
+    
+        switch (attendeeTypeChoice) {
+            case 1:
+                attendee = new Attendee(name, email); 
+                break;
+            case 2:
+                // VIP Attendee gets a fixed 15% discount
+                attendee = new VIPAttendee(name, email, "Full"); 
+            case 3:
+                // Premium Attendee gets a fixed 30% discount
+                attendee = new PremiumAttendee(name, email, 30.0); 
+                break;
+            default:
+                System.out.println("Invalid choice. Returning to the menu.");
+                return;
+        }
+    
         eventAttendees.get(event).add(attendee);
         System.out.println("Attendee registered successfully!");
     }
-
+    
     private static void displayAttendeeList() {
         System.out.print("\nEnter event name to view attendees: ");
         String eventName = scanner.nextLine();
@@ -392,4 +445,5 @@ public class EventRegistrationSystem {
     private static boolean isValidEmail(String email) {
         return email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
     }
+
 }
