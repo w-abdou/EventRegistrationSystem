@@ -5,6 +5,7 @@ public class Event {
     private String category;
     private int capacity;
 
+    // Constructor
     public Event(String eventName, String eventDate, String organizer, String category, int capacity) {
         this.eventName = eventName;
         this.eventDate = eventDate;
@@ -12,7 +13,8 @@ public class Event {
         this.category = category;
         this.capacity = capacity;
     }
-
+    
+    // Getters and Setters
     public String getEventName() {
         return eventName;
     }
@@ -55,7 +57,12 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event: " + eventName + ", Date: " + eventDate + ", Organizer: " + organizer +
-                ", Category: " + category + ", Capacity: " + capacity;
+        return "Event{" +
+                "eventName='" + eventName + '\'' +
+                ", eventDate='" + eventDate + '\'' +
+                ", organizer='" + organizer + '\'' +
+                ", category='" + category + '\'' +
+                ", capacity=" + capacity +
+                '}';
     }
 }

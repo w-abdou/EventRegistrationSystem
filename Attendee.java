@@ -2,11 +2,13 @@ public class Attendee {
     private String name;
     private String email;
 
+    // Constructor
     public Attendee(String name, String email) {
         this.name = name;
         this.email = email;
     }
 
+    // Getters and Setters
     public String getName() {
         return name;
     }
@@ -25,6 +27,9 @@ public class Attendee {
 
     @Override
     public String toString() {
-        return "Name: " + name + ", Email: " + email;
+        return "Attendee{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

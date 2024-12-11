@@ -72,20 +72,21 @@ public class EventRegistrationSystem {
         System.out.println("\n=========================================");
         System.out.println("Welcome to the Event Registration System!");
         System.out.println("=========================================\n");
-        if (currentUserRole.equals("admin")) { //admins menu
+        
+        if (currentUserRole.equals("admin")) { // Admins menu
             System.out.println("1. Create Event");
             System.out.println("2. Modify/Delete Event");
             System.out.println("3. Register Attendee");
             System.out.println("4. Display Attendee List");
             System.out.println("5. Exit");
             System.out.println("6. Logout");
-        } else { //users menu
-            System.out.println("1. View Events");
+        } else { // Users menu
+            System.out.println("1. Display Events");
             System.out.println("2. Register Attendee");
-            System.out.println("3. Display Attendee List");
-            System.out.println("4. Exit");
-            System.out.println("5. Logout");
+            System.out.println("3. Exit");
+            System.out.println("4. Logout");
         }
+        
         System.out.println("=========================");
         System.out.print("Enter your choice: ");
     }
@@ -103,29 +104,51 @@ public class EventRegistrationSystem {
     }
 
     private static void handleMenuChoice(int choice) {
-        switch (choice) {
-            case 1:
-                if (currentUserRole.equals("admin")) {
-                    createEvent();
-                } else {
-                    displayEvents();
-                }
-                break;
-            case 2:
-                if (currentUserRole.equals("admin")) {
-                    modifyOrDeleteEvent();
-                } else {
-                    System.out.println("Invalid choice for user role.");
-                }
-                break;
-            case 3:
-                registerAttendee();
-                break;
-            case 4:
-                displayAttendeeList();
-                break;
-            default:
-                System.out.println("Invalid choice. Try again.");
+        if (currentUserRole.equals("admin")) {
+            switch (choice) {
+                case 1:
+                    createEvent(); // Admin: Create Event
+                    break;
+                case 2:
+                    modifyOrDeleteEvent(); // Admin: Modify/Delete Event
+                    break;
+                case 3:
+                    registerAttendee(); // Admin: Register Attendee
+                    break;
+                case 4:
+                    displayAttendeeList(); // Admin: Display Attendee List
+                    break;
+                case 5:
+                    System.out.println("Exiting the system. Goodbye!"); // Admin: Exit
+                    System.exit(0); // Exit the application
+                    break;
+                case 6:
+                    System.out.println("Logging out..."); // Admin: Logout
+                    main(new String[0]); // Restart the program for login
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+        
+            }
+        } else { // User menu
+            switch (choice) {
+                case 1:
+                    displayEvents(); // User: Display Events
+                    break;
+                case 2:
+                    registerAttendee(); // User: Register Attendee
+                    break;
+                case 3:
+                    System.out.println("Exiting the system. Goodbye!"); // User: Exit
+                    System.exit(0); // Exit the application
+                    break;
+                case 4:
+                    System.out.println("Logging out..."); // User: Logout
+                    main(new String[0]); // Restart the program for login
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
         }
     }
 
@@ -190,7 +213,7 @@ public class EventRegistrationSystem {
             }
         } while (!isValidCapacity(capacity));
 
-        Event event = new Event(name, date, organizer, category, capacity);
+        Event event = new Event (name, date, organizer, category, capacity);
         events.add(event);
         eventAttendees.put(event, new ArrayList<>());
         System.out.println("Event created successfully!");
