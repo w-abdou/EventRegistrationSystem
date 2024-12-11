@@ -445,5 +445,18 @@ public class EventRegistrationSystem {
     private static boolean isValidEmail(String email) {
         return email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
     }
-
+    private static double getValidatedDouble() {
+        double input = -1;
+        while (input <= 0) {
+            try {
+                input = Double.parseDouble(scanner.nextLine());
+                if (input <= 0) {
+                    System.out.print("Ticket price must be a positive number. Please enter again: ");
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid input. Please enter a valid number for the ticket price: ");
+            }
+        }
+        return input;
+    }
 }
