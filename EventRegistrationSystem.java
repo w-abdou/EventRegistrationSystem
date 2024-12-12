@@ -16,12 +16,10 @@ public class EventRegistrationSystem {
     public static void main(String[] args) {
         boolean loggedIn = false;
 
-        // Login process
         while (!loggedIn) {
             loggedIn = login();
         }
 
-        // Main system loop
         while (true) {
             displayMainMenu();
             int choice = getValidatedChoice(6);
@@ -30,8 +28,7 @@ public class EventRegistrationSystem {
                 break;
             } else if (choice == 6) {
                 System.out.println("Logging out...");
-                main(new String[0]); // Restart the program for login
-                return;
+                main(new String[0]); 
             }
             handleMenuChoice(choice);
         }
@@ -91,7 +88,6 @@ public class EventRegistrationSystem {
         System.out.print("Enter your choice: ");
     }
     
-
     private static int getValidatedChoice(int maxOption) {
         int choice = -1;
         try {
@@ -107,24 +103,24 @@ public class EventRegistrationSystem {
         if (currentUserRole.equals("admin")) {
             switch (choice) {
                 case 1:
-                    createEvent(); // Admin: Create Event
+                    createEvent(); 
                     break;
                 case 2:
-                    modifyOrDeleteEvent(); // Admin: Modify/Delete Event
+                    modifyOrDeleteEvent(); 
                     break;
                 case 3:
-                    registerAttendee(); // Admin: Register Attendee
+                    registerAttendee(); 
                     break;
                 case 4:
-                    displayAttendeeList(); // Admin: Display Attendee List
+                    displayAttendeeList(); 
                     break;
                 case 5:
-                    System.out.println("Exiting the system. Goodbye!"); // Admin: Exit
-                    System.exit(0); // Exit the application
+                    System.out.println("Exiting the system. Goodbye!"); 
+                    System.exit(0); 
                     break;
                 case 6:
-                    System.out.println("Logging out..."); // Admin: Logout
-                    main(new String[0]); // Restart the program for login
+                    System.out.println("Logging out..."); 
+                    main(new String[0]); 
                     return;
                 default:
                     System.out.println("Invalid choice. Try again.");
@@ -133,18 +129,18 @@ public class EventRegistrationSystem {
         } else { // User menu
             switch (choice) {
                 case 1:
-                    displayEvents(); // User: Display Events
+                    displayEvents(); 
                     break;
                 case 2:
-                    registerAttendee(); // User: Register Attendee
+                    registerAttendee();
                     break;
                 case 3:
-                    System.out.println("Exiting the system. Goodbye!"); // User: Exit
-                    System.exit(0); // Exit the application
+                    System.out.println("Exiting the system. Goodbye!"); 
+                    System.exit(0); 
                     break;
                 case 4:
-                    System.out.println("Logging out..."); // User: Logout
-                    main(new String[0]); // Restart the program for login
+                    System.out.println("Logging out..."); 
+                    main(new String[0]); 
                     return;
                 default:
                     System.out.println("Invalid choice. Try again.");
@@ -154,6 +150,29 @@ public class EventRegistrationSystem {
 
     private static void createEvent() {
         System.out.println("\n=== Create a New Event ===");
+    
+        System.out.println("Choose event type:");
+        System.out.println("1. Event");
+        System.out.println("2. Conference");
+        System.out.println("3. Workshop");
+    
+        int eventTypeChoice = getValidatedChoice(3);
+        
+        String eventType = "";
+        switch (eventTypeChoice) {
+            case 1:
+                eventType = "Event";
+                break;
+            case 2:
+                eventType = "Conference";
+                break;
+            case 3:
+                eventType = "Workshop";
+                break;
+            default:
+                System.out.println("Invalid choice. Returning to the menu.");
+                return;
+        }
     
         String name;
         do {
@@ -213,27 +232,16 @@ public class EventRegistrationSystem {
             }
         } while (!isValidCapacity(capacity));
     
-        double ticketPrice;
-        do {
-            System.out.print("Enter ticket price: $");
-            try {
-                ticketPrice = Double.parseDouble(scanner.nextLine());
-                if (ticketPrice <= 0) {
-                    System.out.println("Invalid price. The ticket price must be greater than 0.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid price.");
-                ticketPrice = -1;
-            }
-        } while (ticketPrice <= 0);
+        System.out.print("Enter ticket price: $");
+        double ticketPrice = getValidatedDouble(); 
     
-        Event event = new Event (name, date, organizer, category, capacity, ticketPrice);
-                events.add(event);
-                eventAttendees.put(event, new ArrayList<>());
-                System.out.println("Event created successfully!");
-            }
-        
-            private static void displayEvents() {
+        Event event = new Event(name, date, organizer, category, capacity, ticketPrice, eventType);
+        events.add(event);
+        eventAttendees.put(event, new ArrayList<>());
+        System.out.println("Event created successfully as a " + eventType + "!");
+    }
+
+    private static void displayEvents() {
         System.out.println("\n=== Available Events ===");
         if (events.isEmpty()) {
             System.out.println("No events available.");
@@ -244,7 +252,7 @@ public class EventRegistrationSystem {
         }
         System.out.println();
     }
-
+    
     private static void modifyOrDeleteEvent() {
         System.out.println("\n=== Modify or Delete Event ===");
         System.out.print("Enter event name: ");
@@ -445,6 +453,7 @@ public class EventRegistrationSystem {
     private static boolean isValidEmail(String email) {
         return email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
     }
+   
     private static double getValidatedDouble() {
         double input = -1;
         while (input <= 0) {
