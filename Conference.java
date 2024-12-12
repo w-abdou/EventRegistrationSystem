@@ -2,8 +2,8 @@ public class Conference extends Event {
     private int numberOfSpeakers;
 
     // Constructor
-    public Conference(String eventName, String eventDate, String organizer, String category, int capacity, int numberOfSpeakers) {
-        super(eventName, eventDate, organizer, category, capacity, numberOfSpeakers);
+    public Conference(String eventName, String eventDate, String organizer, String category, int capacity, int numberOfSpeakers, String eventType ) {
+        super(eventName, eventDate, organizer, category, capacity, numberOfSpeakers, eventType );
         this.numberOfSpeakers = numberOfSpeakers;
     }
 
