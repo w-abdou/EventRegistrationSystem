@@ -5,15 +5,18 @@ public class Event {
     private String category;
     private int capacity;
     protected static double ticketPrice;
+    private String eventType; 
 
     // Constructor
-    public Event(String eventName, String eventDate, String organizer, String category, int capacity, double ticketPrice) {
+    public Event(String eventName, String eventDate, String organizer, String category, int capacity, double ticketPrice, String eventType) {
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.organizer = organizer;
         this.category = category;
         this.capacity = capacity;
         Event.ticketPrice = ticketPrice; 
+        this.eventType = eventType;
+
     }
     
     // Getters and Setters
@@ -64,6 +67,15 @@ public class Event {
         Event.ticketPrice = ticketPrice;
     }
 
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
+
     @Override
     public String toString() {
         return "Event{" +
@@ -73,6 +85,7 @@ public class Event {
                 ", category='" + category + '\'' +
                 ", capacity=" + capacity +
                 ", ticketPrice=$" + ticketPrice + 
+                ", eventType" + eventType + 
                 '}';
     }
 }
