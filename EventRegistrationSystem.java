@@ -176,7 +176,7 @@ public class EventRegistrationSystem {
     
         String name;
         do {
-            System.out.print("Enter event name (letters and spaces only): ");
+            System.out.print("Enter " +  eventType +" name (letters and spaces only): ");
             name = scanner.nextLine();
             if (!isValidName(name)) {
                 System.out.println("Invalid name. Only letters and spaces are allowed.");
@@ -185,7 +185,7 @@ public class EventRegistrationSystem {
     
         String date;
         do {
-            System.out.print("Enter event date (YYYY-MM-DD): ");
+            System.out.print("Enter " +  eventType +" date (YYYY-MM-DD): ");
             date = scanner.nextLine();
             if (!isValidDate(date)) {
                 System.out.println("Invalid date. Please try again.");
@@ -469,3 +469,4 @@ public class EventRegistrationSystem {
         return input;
     }
 }
+
