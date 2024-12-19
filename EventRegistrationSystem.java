@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -236,9 +237,16 @@ public class EventRegistrationSystem {
         double ticketPrice = getValidatedDouble(); 
     
         Event event = new Event(name, date, organizer, category, capacity, ticketPrice, eventType);
-        events.add(event);
+        EventAdmin evadmin = new EventAdmin();
+        events = evadmin.createEvent(event);
+        //  events.add(event);
         eventAttendees.put(event, new ArrayList<>());
         System.out.println("Event created successfully as a " + eventType + "!");
+
+
+        // TEXT file containing events
+        // CreateFile();
+        // appendFile("Events List.txt", str);
     }
 
     private static void displayEvents() {
@@ -468,5 +476,21 @@ public class EventRegistrationSystem {
         }
         return input;
     }
+
+    public static void CreateFile() {
+       try {
+      File EventsList = new File("Events List.txt");
+      if (EventsList.createNewFile()) {
+        System.out.println("File created: " + EventsList.getName());
+      } else {
+        System.out.println("File already exists.");
+      }
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+    }
+
+    //add append file here
 }
 
