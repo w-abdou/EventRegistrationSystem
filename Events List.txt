@@ -1,0 +1,11 @@
+Event Name  | Date        | Organizer   | Category  | Capacity | Ticket Price | Event Type   
+eve           | 2025-02-02  | me           | Health    | 20        | 20.0          | Workshop
+some           | 2025-02-02  | ap           | Tech    | 12        | 12.0          | Workshop
+eve           | 2025-02-02  | pa           | Tech    | 23        | 50.0          | Event
+eve           | 2025-02-02  | er           | Tech    | 20        | 50.0          | Event
+asf           | 2025-02-02  | ae           | Tech    | 23        | 54.0          | Workshop
+eve           | 2025-02-02  | er           | Tech    | 12        | 57.0          | Event
+eve           | 2025-02-02  | ase           | Tech    | 34        | 234.0          | Event
+eve           | 2025-02-02  | ad           | Tech    | 32        | 32.0          | Event
+eve           | 2025-02-02  | a           | Tech    | 34        | 234.0          | Event
+eve           | 2025-02-02  | asdf           | Tech    | 23        | 24.0          | Conference

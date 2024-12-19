@@ -4,7 +4,7 @@ public class Event {
     private String organizer;
     private String category;
     private int capacity;
-    protected static double ticketPrice;
+    protected double ticketPrice;
     private String eventType; 
 
     // Constructor
@@ -14,7 +14,7 @@ public class Event {
         this.organizer = organizer;
         this.category = category;
         this.capacity = capacity;
-        Event.ticketPrice = ticketPrice; 
+        this.ticketPrice = ticketPrice; 
         this.eventType = eventType;
 
     }
@@ -64,7 +64,7 @@ public class Event {
     }
 
     public void setTicketPrice(double ticketPrice) {
-        Event.ticketPrice = ticketPrice;
+        this.ticketPrice = ticketPrice;
     }
 
     public String getEventType() {

@@ -1,5 +1,9 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +18,7 @@ public class EventRegistrationSystem {
     private static String currentUserRole = ""; // Will be set during login
     private static final List<String> VALID_CATEGORIES = Arrays.asList("Tech", "Business", "Health", "Education", "Art");
 
+    private static EventAdmin eventadmin = new EventAdmin();
     public static void main(String[] args) {
         boolean loggedIn = false;
 
@@ -237,26 +242,48 @@ public class EventRegistrationSystem {
         double ticketPrice = getValidatedDouble(); 
     
         Event event = new Event(name, date, organizer, category, capacity, ticketPrice, eventType);
-        EventAdmin evadmin = new EventAdmin();
-        events = evadmin.createEvent(event);
-        //  events.add(event);
+        events = eventadmin.createEvent(event);
+
         eventAttendees.put(event, new ArrayList<>());
+        CreateFile(event);
         System.out.println("Event created successfully as a " + eventType + "!");
 
-
-        // TEXT file containing events
-        // CreateFile();
-        // appendFile("Events List.txt", str);
+        
     }
 
     private static void displayEvents() {
+        double discount;
+        System.out.println("\nChoose attendee type:");
+        System.out.println("1. Normal Attendee");
+        System.out.println("2. VIP Attendee");
+        System.out.println("3. Premium Attendee");
+        int attendeeType = scanner.nextInt();
+       
+        
         System.out.println("\n=== Available Events ===");
         if (events.isEmpty()) {
             System.out.println("No events available.");
             return;
         }
+        switch (attendeeType) {
+            case 1:
+                discount = 0;
+                break;
+            case 2:
+                // VIP Attendee gets a fixed 15% discount
+                discount = 15.0 / 100;
+                break;
+            case 3:
+                // Premium Attendee gets a fixed 30% discount
+                discount = 30.0 / 100; 
+                break;
+            default:
+                System.out.println("Invalid choice. Returning to the menu.");
+                return;
+        }
         for (Event event : events) {
-            System.out.println(event);
+            String record = EventObjToString(event, discount);
+            System.out.println(record);
         }
         System.out.println();
     }
@@ -281,7 +308,7 @@ public class EventRegistrationSystem {
                 if (choice == 1) {
                     modifyEvent(event);
                 } else if (choice == 2) {
-                    events.remove(event);
+                    events = eventadmin.deleteEvent(event);
                     eventAttendees.remove(event);
                     System.out.println("Event deleted successfully.");
                 } else {
@@ -387,23 +414,23 @@ public class EventRegistrationSystem {
             System.out.print("Invalid email format. Please enter again: ");
             email = scanner.nextLine();
         }
-
+        
         System.out.println("\nChoose attendee type:");
         System.out.println("1. Normal Attendee");
         System.out.println("2. VIP Attendee");
         System.out.println("3. Premium Attendee");
-    
-        int attendeeTypeChoice = getValidatedChoice(3);
+        
+        String attendeeTypeChoice = currentUserRole;
         Attendee attendee = null;
     
         switch (attendeeTypeChoice) {
-            case 1:
+            case "Normal":
                 attendee = new Attendee(name, email); 
                 break;
-            case 2:
+            case "VIP":
                 // VIP Attendee gets a fixed 15% discount
                 attendee = new VIPAttendee(name, email, "Full"); 
-            case 3:
+            case "Premium":
                 // Premium Attendee gets a fixed 30% discount
                 attendee = new PremiumAttendee(name, email, 30.0); 
                 break;
@@ -477,7 +504,24 @@ public class EventRegistrationSystem {
         return input;
     }
 
-    public static void CreateFile() {
+    public static String EventObjToString(Event eve, double discount) {
+        String name = eve.getEventName();
+        String date = eve.getEventDate(); 
+        String organ = eve.getOrganizer(); 
+        String category =  eve.getCategory();
+        String cap = String.valueOf(eve.getCapacity());
+        String price = String.valueOf(eve.getTicketPrice() - eve.getTicketPrice()*discount) ;
+        System.out.println(price);
+        String type = String.valueOf(eve.getEventType());
+        String str = name + "           | " + date +  "  | " + organ +  "           | " + category +  "    | " + cap + "        | " + price + "          | " + type;
+        return str;
+    }
+    public static void CreateFile(Event eve) {
+        String str = EventObjToString(eve, 0);
+        FileWrite();
+        appendFile("Events List.txt", str);
+    }
+    public static void FileWrite() {
        try {
       File EventsList = new File("Events List.txt");
       if (EventsList.createNewFile()) {
@@ -489,6 +533,31 @@ public class EventRegistrationSystem {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
+    }
+
+     public static void appendFile(String fileName, String str)
+    {
+        // Try block to check for exceptions
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(fileName, true));
+            // Open given file in append mode by creating an
+            // object of BufferedWriter class
+            BufferedReader br = new BufferedReader(new FileReader("Events List.txt"));     
+            if (br.readLine() == null) {
+               out.write("Event Name  | Date        | Organizer   | Category  | Capacity | Ticket Price | Event Type   \n");
+            }
+            // Writing on output stream
+            out.write(str + '\n');
+            // Closing the connection
+            out.close();
+        }
+ 
+        // Catch block to handle the exceptions
+        catch (IOException e) {
+ 
+            // Display message when exception occurs
+            System.out.println("exception occurred" + e);
+        }
     }
 
     //add append file here

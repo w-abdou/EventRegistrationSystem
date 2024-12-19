@@ -11,10 +11,12 @@ public class filetest {
           String name = eve.getEventName();
           String date = eve.getEventDate(); 
           String organ = eve.getOrganizer(); 
-          String type =  eve.getCategory();
+          String category =  eve.getCategory();
           String cap = String.valueOf(eve.getCapacity());
-          String str = name + "         | " + date +  "  | " + organ +  "       | " + type +  "      | " + cap;
-
+          String price = String.valueOf(eve.getTicketPrice());
+          String type = String.valueOf(eve.getEventType());
+          String str = name + "         | " + date +  "  | " + organ +  "       | " + category +  "      | " + cap + "       | " + price + "         | " + type;
+  
             CreateFile();
             appendFile("test.txt", str);
     }
@@ -42,7 +44,7 @@ public class filetest {
             // object of BufferedWriter class
             BufferedReader br = new BufferedReader(new FileReader("test.txt"));     
             if (br.readLine() == null) {
-               out.write("Event Name  | Date        | Organizer   | Category  | Capacity  \n");
+               out.write("Event Name  | Date        | Organizer   | Category  | Capacity | Ticket Price | Event Type   \n");
             }
             // Writing on output stream
             out.write(str + '\n');

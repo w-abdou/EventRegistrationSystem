@@ -2,7 +2,6 @@ import java.util.List;
 
 public interface Admin {
     List<Event> createEvent(Event event);
-    void deleteEvent(Event event);
-    void viewAllEvents();
+    List<Event> deleteEvent(Event event);
     void viewEventAttendees(Event event);
 }

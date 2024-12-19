@@ -6,21 +6,30 @@ private static List<Event> events = new ArrayList<>();
 // give event admin username
     @Override
     public List<Event> createEvent(Event event) {
-        System.out.println(event.getEventName());
         events.add(event);
         return events;
     }
 
     @Override
-    public void deleteEvent(Event event) {
+    public List<Event> deleteEvent(Event event) {
+        System.out.println(event.getEventName());
         events.remove(event);
+        return events;
     }
-
+/* 
     @Override
-    public void viewAllEvents() {
-        System.out.println("hi");
+    public void viewAllEvents(List<Event> events) {
+        System.out.println("\n=== Available Events ===");
+        if (events.isEmpty()) {
+            System.out.println("No events available.");
+            return;
+        }
+        for (Event event : events) {
+            System.out.println(event);
+        }
+        System.out.println();    
     }
-
+*/
     @Override
     public void viewEventAttendees(Event event) {
         System.out.println("fill these in later");

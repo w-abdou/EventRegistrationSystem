@@ -1,0 +1,2 @@
+Event Name  | Date        | Organizer   | Category  | Capacity | Ticket Price | Event Type   
+eve         | 2025-02-02  | farah       | Tech      | 30       | 20.0         | Conference
