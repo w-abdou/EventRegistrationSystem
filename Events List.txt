@@ -1,2 +1,0 @@
-Event Name                | Date        | Organizer      | Category  | Capacity | Ticket Price | Event Type   
-Conference longname       | 2025-02-02 | someone        | Tech      |      232 |        $34.0 | Conference 

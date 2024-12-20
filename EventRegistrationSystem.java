@@ -205,6 +205,7 @@ public class EventRegistrationSystem {
             System.out.println("Invalid name. Only letters and spaces allowed.");
             organizer = scanner.nextLine();
         }
+
     
         System.out.println("Choose a category:");
         for (int i = 0; i < VALID_CATEGORIES.size(); i++) {
@@ -241,7 +242,6 @@ public class EventRegistrationSystem {
     
         System.out.print("Enter ticket price: $");
         double ticketPrice = getValidatedDouble(); 
-    
         Event event = new Event(name, date, organizer, category, capacity, ticketPrice, eventType);
         events = eventadmin.createEvent(event);
 
@@ -253,19 +253,19 @@ public class EventRegistrationSystem {
     }
 
     private static void displayEvents() {
-        double discount;
-        System.out.println("\nChoose attendee type:");
-        System.out.println("1. Normal Attendee");
-        System.out.println("2. VIP Attendee");
-        System.out.println("3. Premium Attendee");
-        int attendeeType = scanner.nextInt();
-       
-        
         System.out.println("\n=== Available Events ===");
         if (events.isEmpty()) {
             System.out.println("No events available.");
             return;
         }
+        /* 
+        double discount
+        System.out.println("\nChoose attendee type:");
+        System.out.println("1. Normal Attendee");
+        System.out.println("2. VIP Attendee");
+        System.out.println("3. Premium Attendee");
+        int attendeeType = scanner.nextInt();
+    
         switch (attendeeType) {
             case 1:
                 discount = 0;
@@ -281,9 +281,10 @@ public class EventRegistrationSystem {
             default:
                 System.out.println("Invalid choice. Returning to the menu.");
                 return;
-        }
+        } 
+                */
         for (Event event : events) {
-            String record = EventObjToString(event, discount);
+            String record = EventObjToString(event, 0);
             System.out.println(record);
         }
         System.out.println();
