@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
+
 public class EventRegistrationSystem {
     private static List<Event> events = new ArrayList<>();
     private static Map<Event, List<Attendee>> eventAttendees = new HashMap<>();
@@ -510,10 +511,9 @@ public class EventRegistrationSystem {
         String organ = eve.getOrganizer(); 
         String category =  eve.getCategory();
         String cap = String.valueOf(eve.getCapacity());
-        String price = String.valueOf(eve.getTicketPrice() - eve.getTicketPrice()*discount) ;
-        System.out.println(price);
+        String price = "$" + String.valueOf(eve.getTicketPrice() - eve.getTicketPrice()*discount) ;
         String type = String.valueOf(eve.getEventType());
-        String str = name + "           | " + date +  "  | " + organ +  "           | " + category +  "    | " + cap + "        | " + price + "          | " + type;
+        String str = String.format("%-25s | %5s | %-20s | %-8s | %8s | %12s | %-10s \r", name, date, organ, category, cap, price, type);       
         return str;
     }
     public static void CreateFile(Event eve) {
@@ -526,11 +526,9 @@ public class EventRegistrationSystem {
       File EventsList = new File("Events List.txt");
       if (EventsList.createNewFile()) {
         System.out.println("File created: " + EventsList.getName());
-      } else {
-        System.out.println("File already exists.");
-      }
+      } 
     } catch (IOException e) {
-      System.out.println("An error occurred.");
+      System.out.println("An error occurred in creating file.");
       e.printStackTrace();
     }
     }
@@ -544,7 +542,7 @@ public class EventRegistrationSystem {
             // object of BufferedWriter class
             BufferedReader br = new BufferedReader(new FileReader("Events List.txt"));     
             if (br.readLine() == null) {
-               out.write("Event Name  | Date        | Organizer   | Category  | Capacity | Ticket Price | Event Type   \n");
+               out.write(String.format("%-25s | %5s | %-20s | %-8s | %8s | %12s | %-10s \r", "Event Name", "Date", "Organizer", "Category", "Capacity", "Ticket Price", "Event Type");
             }
             // Writing on output stream
             out.write(str + '\n');

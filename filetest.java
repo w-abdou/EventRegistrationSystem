@@ -6,19 +6,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class filetest {
-    static Event eve = new Event("eve", "2025-02-02", "farah", "Tech", 30, 20, "Conference");
+    static Event eve = new Event("Burning Man", "2025-02-32", "Loser Loser", "Fashion", 999, 15.9, "Event");
         public static void main(String[] args) {
           String name = eve.getEventName();
           String date = eve.getEventDate(); 
           String organ = eve.getOrganizer(); 
           String category =  eve.getCategory();
           String cap = String.valueOf(eve.getCapacity());
-          String price = String.valueOf(eve.getTicketPrice());
+          String price = "$" + String.valueOf(eve.getTicketPrice());
           String type = String.valueOf(eve.getEventType());
-          String str = name + "         | " + date +  "  | " + organ +  "       | " + category +  "      | " + cap + "       | " + price + "         | " + type;
-  
+         // String str = name + "         | " + date +  "  | " + organ +  "       | " + category +  "      | " + cap + "       | " + price + "         | " + type;
+        
+          /* 
+            
+            */
+            
+            
+            String str = String.format("%-20s | %5s | %-15s | %-5s | %5s | %5s | %10s \r", "burning man", date, "Elizabeth Berk", category, 30, price, type);
+            String str2 = String.format("%-20s | %5s | %-15s | %-8s | %8s | %12s | %-10s \r", name, date, organ, category, cap, price, type);
+
+            //System.out.println(hi);
             CreateFile();
-            appendFile("test.txt", str);
+            appendFile("test.txt", str2);
     }
 
     public static void CreateFile() {
@@ -44,7 +53,7 @@ public class filetest {
             // object of BufferedWriter class
             BufferedReader br = new BufferedReader(new FileReader("test.txt"));     
             if (br.readLine() == null) {
-               out.write("Event Name  | Date        | Organizer   | Category  | Capacity | Ticket Price | Event Type   \n");
+               out.write("Event Name  | Date       | Organizer       | Category | Capacity | Ticket Price | Event Type   \n");
             }
             // Writing on output stream
             out.write(str + '\n');
