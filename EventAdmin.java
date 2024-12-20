@@ -30,9 +30,5 @@ private static List<Event> events = new ArrayList<>();
         System.out.println();    
     }
 */
-    @Override
-    public void viewEventAttendees(Event event) {
-        System.out.println("fill these in later");
-    }
 
 }

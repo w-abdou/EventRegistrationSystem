@@ -560,7 +560,7 @@ public class EventRegistrationSystem {
             // object of BufferedWriter class
             BufferedReader br = new BufferedReader(new FileReader("Events List.txt"));     
             if (br.readLine() == null) {
-               out.write(String.format("%-30s | %10s | %-20s | %-10s | %8s | %12s | %-11s | %-22s | %-14s \r", "Event Name", "Date", "Organizer", "Category", "Capacity", "Ticket Price", "Event Type", "Topic", "No Of Speakers"));
+               out.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", "Event Name", "Date", "Organizer", "Category", "Capacity", "Ticket Price", "Event Type", "Topic", "No Of Speakers"));
             }
             // Writing on output stream
             out.write(str + '\n');
@@ -597,7 +597,7 @@ public class EventRegistrationSystem {
                         eventadmin.createEvent(event);
                     } /* 
                     if (eventType == "Conference") {
-
+                    
                     }
                     
                     }
