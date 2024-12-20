@@ -19,4 +19,4 @@ Digital Marketing Workshop,2025-07-12,MarketTech,Business,350,75,Workshop,Social
 Digital Transformation Forum,2025-08-22,DigiChange,Tech,700,N/A,Conference,N/A,6
 Creative Arts Conference,2025-09-09,ArtVision,Art,200,N/A,Conference,N/A,10
 Wellness Tech Expo,2025-10-16,WellTech,Health,350,100,Event,N/A,N/Asomething,2025-02-02,someone,Tech,123,43.0,Event,N/A,N/A
-
+test1,2025-09-09,Tech,100,100.0
