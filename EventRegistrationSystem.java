@@ -531,7 +531,7 @@ public class EventRegistrationSystem {
         if (type == "Workshop") {
             topic = String.valueOf(eve.WorkshopDetails());
         }
-        String str = String.format("%-25s | %5s | %-20s | %-8s | %8s | %12s | %-10s | %-15s | %14s \r", name, date, organ, category, cap, price, type, topic, speakers);       
+        String str = String.format("%-30s | %10s | %-20s | %-10s | %8s | %12s | %-11s | %-22s | %-14s \r", name, date, organ, category, cap, price, type, topic, speakers);       
         return str;
     }
     public static void CreateFile(Event eve) {
@@ -560,7 +560,7 @@ public class EventRegistrationSystem {
             // object of BufferedWriter class
             BufferedReader br = new BufferedReader(new FileReader("Events List.txt"));     
             if (br.readLine() == null) {
-               out.write(String.format("%-25s | %10s | %-20s | %-8s | %8s | %12s | %-10s | %-15s | %14s \r", "Event Name", "Date", "Organizer", "Category", "Capacity", "Ticket Price", "Event Type", "Topic", "No Of Speakers"));
+               out.write(String.format("%-30s | %10s | %-20s | %-10s | %8s | %12s | %-11s | %-22s | %-14s \r", "Event Name", "Date", "Organizer", "Category", "Capacity", "Ticket Price", "Event Type", "Topic", "No Of Speakers"));
             }
             // Writing on output stream
             out.write(str + '\n');
@@ -575,7 +575,40 @@ public class EventRegistrationSystem {
             System.out.println("exception occurred" + e);
         }
     }
+/* 
+    public static void Database() {
+        try (Scanner fileScanner = new Scanner(new File("EventsDatabase"))) {
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+                String[] parts = line.split(",");
+                if (parts.length == 9) {
+                    String eventName = parts[0];
+                    String eventDate = parts[1];
+                    String eventOrganizer = parts[2];
+                    String Category = parts[3];
+                    int Capacity = Integer.parseInt(parts[4]);
+                    double ticketPrice = Double.parseDouble(parts[5]);
+                    String eventType = parts[6];
+                    String topic = parts[7];
+                    String speakers = parts[8];
+
+                    if (eventType == "Event") {
+                        Event event = new Event(eventName, eventDate, eventOrganizer, Category, Capacity, ticketPrice, eventType);
+                        eventadmin.createEvent(event);
+                    } /* 
+                    if (eventType == "Conference") {
+
+                    }
+                    
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: login_info.txt file not found.");
+        }
+        */
+    }
 
     //add append file here
-}
+
 

@@ -1,5 +1,0 @@
-Event Name           | Date       | Organizer       | Category | Capacity | Ticket Price | Event Type   
-Japan Expo           | 2025-02-02 | WI MAN          | Fashion  |   999    | $200.0       | COnference 
-
-Burning Man          | 2025-02-02 | WI MAN          | Tech     |    20 | $200.0 | COnference 
-Burning Man          | 2025-02-32 | Loser Loser     | Fashion  |   999 |  $15.9 | Event      
