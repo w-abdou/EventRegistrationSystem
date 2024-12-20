@@ -542,7 +542,7 @@ public class EventRegistrationSystem {
             // object of BufferedWriter class
             BufferedReader br = new BufferedReader(new FileReader("Events List.txt"));     
             if (br.readLine() == null) {
-               out.write(String.format("%-25s | %5s | %-20s | %-8s | %8s | %12s | %-10s \r", "Event Name", "Date", "Organizer", "Category", "Capacity", "Ticket Price", "Event Type");
+               out.write(String.format("%-25s | %5s | %-20s | %-8s | %8s | %12s | %-10s \r", "Event Name", "Date", "Organizer", "Category", "Capacity", "Ticket Price", "Event Type"));
             }
             // Writing on output stream
             out.write(str + '\n');
