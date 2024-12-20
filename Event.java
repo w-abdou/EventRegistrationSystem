@@ -75,6 +75,13 @@ public class Event {
         this.eventType = eventType;
     }
 
+    public int ConferenceDetails() {
+        return 0;
+    }
+
+    public String WorkshopDetails() {
+        return "General";
+    }
 
     @Override
     public String toString() {

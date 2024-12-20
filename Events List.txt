@@ -4,3 +4,16 @@ asf                       | 2025-02-02 | asdf                 | Health   |      
 eve                       | 2025-02-02 | somen                | Business |       23 |        $23.0 | Conference 
 adf                       | 2025-02-02 | asdf                 | Health   |       23 |        $43.0 | Workshop   
 asjfh                     | 2025-02-02 | asd                  | Health   |      123 |        $34.0 | Workshop   
+event                     | 2025-02-02 | af                   | Business |        4 |         $2.0 | Event      
+conf                      | 2025-02-02 | some                 | Tech     |       32 |        $16.0 | Conference 
+afdsa                     | 2025-02-02 | asd                  | Business |       21 |        $23.0 | Event      
+sdaf                      | 2025-02-02 | sdf                  | Tech     |      234 |        $20.0 | Conference 
+asdf                      | 2025-02-02 | adf                  | Health   |      234 |        $24.0 | Workshop   
+confernece                | 2025-02-02 | asdf                 | Tech     |       24 |         $5.0 | Conference 
+sf                        | 2025-02-02 | sdf                  | Tech     |       23 |        $23.0 | Event      
+eve                       | 2025-02-02 | af                   | Tech     |      234 |        $54.0 | Event      
+aksj                      | 2025-02-02 | sa                   | Tech     |       34 |         $2.0 | Conference | N/A                  |                  2 
+eve                       | 2025-02-02 | someone              | Tech     |       20 |        $32.0 | Event      | N/A                  |                N/A 
+eve                       | 2025-02-02 | as                   | Tech     |       23 |        $23.0 | Event      | N/A                  |                N/A 
+eve                       | 2025-02-02 | sd                   | Tech     |      387 |        $23.0 | Event      | N/A                  |                N/A 
+eve                       | 2025-02-02 | dhd                  | Tech     |       39 |        $29.0 | Event      | N/A                  |                N/A 

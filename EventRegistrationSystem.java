@@ -19,7 +19,8 @@ public class EventRegistrationSystem {
     private static String currentUserRole = ""; // Will be set during login
     private static final List<String> VALID_CATEGORIES = Arrays.asList("Tech", "Business", "Health", "Education", "Art");
 
-    private static EventAdmin eventadmin = new EventAdmin();
+    private static EventAdmin eventadmin = new EventAdmin();   
+
     public static void main(String[] args) {
         boolean loggedIn = false;
 
@@ -244,13 +245,48 @@ public class EventRegistrationSystem {
     
         System.out.print("Enter ticket price: $");
         double ticketPrice = getValidatedDouble(); 
-        Event event = new Event(name, date, organizer, category, capacity, ticketPrice, eventType);
-        events = eventadmin.createEvent(event);
+        if (eventType == "Event") {
+            Event event = new Event(name, date, organizer, category, capacity, ticketPrice, eventType);
+            events = eventadmin.createEvent(event);
+            eventAttendees.put(event, new ArrayList<>());
+            CreateFile(event);
+        }
+        else if (eventType == "Conference") {
+            int speakers;
+            do {
+            System.out.print("Enter number of speakers: ");
+            try {
+                speakers = Integer.parseInt(scanner.nextLine());
+                if (!isValidNoOfSpeakers(speakers)) {
+                    System.out.println("Invalid number of speakers, must be between 1 and 15");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. number of speakers must be a number.");
+                speakers = -1;
+            } }
+            while (!(isValidNoOfSpeakers(speakers)));
+         
+            Conference conference = new Conference(name, date, organizer, category, capacity, speakers, eventType);
+            events = eventadmin.createEvent(conference);
+            eventAttendees.put(conference, new ArrayList<>());
+            CreateFile(conference);
+            
+         }
+        else if (eventType == "Workshop") {
+            System.out.print("Enter topic: ");
+            String topic = scanner.nextLine();
+            while (!isValidName(topic)) {
+                System.out.println("Invalid name. Only letters and spaces allowed.");
+                topic = scanner.nextLine();
+            }
+            Workshop workshop = new Workshop(name, date, organizer, category, capacity, ticketPrice, topic, eventType);
+            events = eventadmin.createEvent(workshop);
+            eventAttendees.put(workshop, new ArrayList<>());
+            CreateFile(workshop);
+            
 
-        eventAttendees.put(event, new ArrayList<>());
-        CreateFile(event);
-        System.out.println("Event created successfully as a " + eventType + "!");
-
+        }
+        System.out.println(eventType + " created successfully !");
         
     }
 
@@ -260,8 +296,17 @@ public class EventRegistrationSystem {
             System.out.println("No events available.");
             return;
         }
-        double discount = 0;
-  
+        double discount;
+        if (currentUserRole.equals("VIP")) {
+            discount = 15.0 / 100;
+        }
+        else if (currentUserRole.equals("Premium")) {
+            discount = 30.0 / 100;
+        }
+        else {
+            discount = 0;
+        }
+
         for (Event event : events) {
             String record = EventObjToString(event, discount);  
             System.out.println(record);
@@ -448,6 +493,10 @@ public class EventRegistrationSystem {
     private static boolean isValidEmail(String email) {
         return email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
     }
+
+    private static boolean isValidNoOfSpeakers(int speakers) {
+        return speakers > 0 && speakers <= 15;
+    }
    
     private static double getValidatedDouble() {
         double input = -1;
@@ -465,6 +514,8 @@ public class EventRegistrationSystem {
     }
 
     public static String EventObjToString(Event eve, double discount) {
+        
+
         String name = eve.getEventName();
         String date = eve.getEventDate(); 
         String organ = eve.getOrganizer(); 
@@ -472,7 +523,15 @@ public class EventRegistrationSystem {
         String cap = String.valueOf(eve.getCapacity());
         String price = "$" + String.valueOf(eve.getTicketPrice() - eve.getTicketPrice()*discount) ;
         String type = String.valueOf(eve.getEventType());
-        String str = String.format("%-25s | %5s | %-20s | %-8s | %8s | %12s | %-10s \r", name, date, organ, category, cap, price, type);       
+        String speakers = "N/A";
+        String topic = "N/A";
+        if (type == "Conference") {
+            speakers = String.valueOf(eve.ConferenceDetails());
+        }
+        if (type == "Workshop") {
+            topic = String.valueOf(eve.WorkshopDetails());
+        }
+        String str = String.format("%-25s | %5s | %-20s | %-8s | %8s | %12s | %-10s | %-15s | %14s \r", name, date, organ, category, cap, price, type, topic, speakers);       
         return str;
     }
     public static void CreateFile(Event eve) {
@@ -501,7 +560,7 @@ public class EventRegistrationSystem {
             // object of BufferedWriter class
             BufferedReader br = new BufferedReader(new FileReader("Events List.txt"));     
             if (br.readLine() == null) {
-               out.write(String.format("%-25s | %10s | %-20s | %-8s | %8s | %12s | %-10s \r", "Event Name", "Date", "Organizer", "Category", "Capacity", "Ticket Price", "Event Type"));
+               out.write(String.format("%-25s | %10s | %-20s | %-8s | %8s | %12s | %-10s | %-15s | %14s \r", "Event Name", "Date", "Organizer", "Category", "Capacity", "Ticket Price", "Event Type", "Topic", "No Of Speakers"));
             }
             // Writing on output stream
             out.write(str + '\n');

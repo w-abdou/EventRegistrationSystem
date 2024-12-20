@@ -17,6 +17,12 @@ public class Conference extends Event {
     }
 
     @Override
+    public int ConferenceDetails() {
+        return numberOfSpeakers;
+    }
+
+
+    @Override
     public String toString() {
         return super.toString() + ", Number of Speakers: " + numberOfSpeakers;
     }
