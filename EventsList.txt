@@ -1,0 +1,22 @@
+Tech Innovations,2025-02-15,TechCorp,Tech,800,N/A,Conference,N/A,10
+Business Growth Summit,2025-03-10,BusinessNet,Business,500,N/A,Conference,N/A,12
+Future of Health Expo,2025-04-05,HealthLeaders,Health,300,100,Event,N/A,N/A
+Digital Art Showcase,2025-05-20,ArtWorld,Art,250,50,Event,N/A,N/A
+Entrepreneurial Ventures,2025-06-10,EcomMinds,Business,400,150,Workshop,Startup Funding,N/A
+Medical Technologies Forum,2025-07-25,MedTech Solutions,Health,200,N/A,Conference,N/A,8
+Coding Bootcamp,2025-08-14,CodeMaster,Tech,600,50,Workshop,Full Stack Development,N/A
+Financial Management Forum,2024-12-20,FinWise,Business,350,N/A,Conference,N/A,5
+Web Development Summit,2025-10-12,WebDev Studios,Tech,900,N/A,Conference,N/A,15
+Art & Culture Festival,2025-11-01,CultureWorks,Art,1000,25,Event,N/A,N/A
+Mobile Innovation Expo,2024-12-20,AppBuilders,Tech,500,110,Workshop,Mobile App Development,N/A
+E-Commerce Growth Summit,2025-01-18,EcomGlobal,Business,600,180,Event,N/A,N/A
+HealthTech Future Summit,2025-02-25,HealthInnovators,Health,450,N/A,Conference,N/A,7
+Global Leadership Summit,2025-03-30,LeaderNetwork,Business,700,250,Event,N/A,N/A
+Educational Reform Workshop,2025-04-15,EduRise,Education,150,60,Workshop,Curriculum Design,N/A
+AI for Business Conference,2025-05-20,AI Solutions,Tech,550,N/A,Conference,N/A,12
+Virtual Reality Expo,2025-06-08,VRTech,Tech,450,180,Event,N/A,N/A
+Digital Marketing Workshop,2025-07-12,MarketTech,Business,350,75,Workshop,Social Media Growth,N/A
+Digital Transformation Forum,2025-08-22,DigiChange,Tech,700,N/A,Conference,N/A,6
+Creative Arts Conference,2025-09-09,ArtVision,Art,200,N/A,Conference,N/A,10
+Wellness Tech Expo,2025-10-16,WellTech,Health,350,100,Event,N/A,N/Asomething,2025-02-02,someone,Tech,123,43.0,Event,N/A,N/A
+
