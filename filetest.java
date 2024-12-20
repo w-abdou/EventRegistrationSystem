@@ -70,3 +70,18 @@ public class filetest {
     }
 
 }
+/*  switch (attendeeTypeChoice) {
+            case "Normal":
+                attendee = new Attendee(name, email); 
+                break;
+            case "VIP":
+                // VIP Attendee gets a fixed 15% discount
+                attendee = new VIPAttendee(name, email, "Full"); 
+            case "Premium":
+                // Premium Attendee gets a fixed 30% discount
+                attendee = new PremiumAttendee(name, email, 30.0); 
+                break;
+            default:
+                System.out.println("Invalid choice. Returning to the menu.");
+                return;
+        } */

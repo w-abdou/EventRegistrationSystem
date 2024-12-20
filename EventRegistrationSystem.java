@@ -205,8 +205,10 @@ public class EventRegistrationSystem {
             System.out.println("Invalid name. Only letters and spaces allowed.");
             organizer = scanner.nextLine();
         }
+        EventOrganizer eveorganizer = new EventOrganizer();
+        eveorganizer.setName(organizer);
 
-    
+
         System.out.println("Choose a category:");
         for (int i = 0; i < VALID_CATEGORIES.size(); i++) {
             System.out.println((i + 1) + ". " + VALID_CATEGORIES.get(i));
@@ -258,37 +260,15 @@ public class EventRegistrationSystem {
             System.out.println("No events available.");
             return;
         }
-        /* 
-        double discount
-        System.out.println("\nChoose attendee type:");
-        System.out.println("1. Normal Attendee");
-        System.out.println("2. VIP Attendee");
-        System.out.println("3. Premium Attendee");
-        int attendeeType = scanner.nextInt();
-    
-        switch (attendeeType) {
-            case 1:
-                discount = 0;
-                break;
-            case 2:
-                // VIP Attendee gets a fixed 15% discount
-                discount = 15.0 / 100;
-                break;
-            case 3:
-                // Premium Attendee gets a fixed 30% discount
-                discount = 30.0 / 100; 
-                break;
-            default:
-                System.out.println("Invalid choice. Returning to the menu.");
-                return;
-        } 
-                */
+        double discount = 0;
+  
         for (Event event : events) {
-            String record = EventObjToString(event, 0);
+            String record = EventObjToString(event, discount);  
             System.out.println(record);
         }
         System.out.println();
-    }
+}
+    
     
     private static void modifyOrDeleteEvent() {
         System.out.println("\n=== Modify or Delete Event ===");
@@ -417,30 +397,8 @@ public class EventRegistrationSystem {
             email = scanner.nextLine();
         }
         
-        System.out.println("\nChoose attendee type:");
-        System.out.println("1. Normal Attendee");
-        System.out.println("2. VIP Attendee");
-        System.out.println("3. Premium Attendee");
         
-        String attendeeTypeChoice = currentUserRole;
-        Attendee attendee = null;
-    
-        switch (attendeeTypeChoice) {
-            case "Normal":
-                attendee = new Attendee(name, email); 
-                break;
-            case "VIP":
-                // VIP Attendee gets a fixed 15% discount
-                attendee = new VIPAttendee(name, email, "Full"); 
-            case "Premium":
-                // Premium Attendee gets a fixed 30% discount
-                attendee = new PremiumAttendee(name, email, 30.0); 
-                break;
-            default:
-                System.out.println("Invalid choice. Returning to the menu.");
-                return;
-        }
-    
+        Attendee attendee = new Attendee(name, email);
         eventAttendees.get(event).add(attendee);
         System.out.println("Attendee registered successfully!");
     }
@@ -543,7 +501,7 @@ public class EventRegistrationSystem {
             // object of BufferedWriter class
             BufferedReader br = new BufferedReader(new FileReader("Events List.txt"));     
             if (br.readLine() == null) {
-               out.write(String.format("%-25s | %5s | %-20s | %-8s | %8s | %12s | %-10s \r", "Event Name", "Date", "Organizer", "Category", "Capacity", "Ticket Price", "Event Type"));
+               out.write(String.format("%-25s | %10s | %-20s | %-8s | %8s | %12s | %-10s \r", "Event Name", "Date", "Organizer", "Category", "Capacity", "Ticket Price", "Event Type"));
             }
             // Writing on output stream
             out.write(str + '\n');

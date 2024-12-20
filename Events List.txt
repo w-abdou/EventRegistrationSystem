@@ -1,0 +1,6 @@
+Event Name                |  Date      | Organizer            | Category | Capacity | Ticket Price | Event Type 
+ekahd                     | 2025-02-02 | asdf                 | Business |       23 |        $43.0 | Conference 
+asf                       | 2025-02-02 | asdf                 | Health   |      234 |        $23.0 | Workshop   
+eve                       | 2025-02-02 | somen                | Business |       23 |        $23.0 | Conference 
+adf                       | 2025-02-02 | asdf                 | Health   |       23 |        $43.0 | Workshop   
+asjfh                     | 2025-02-02 | asd                  | Health   |      123 |        $34.0 | Workshop   
