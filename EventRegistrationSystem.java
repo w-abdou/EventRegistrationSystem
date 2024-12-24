@@ -86,7 +86,8 @@ public class EventRegistrationSystem {
             System.out.println("4. Display Attendee List");
             System.out.println("5. Exit");
             System.out.println("6. Logout");
-        } else { // Users menu
+
+            } else if (currentUserRole.equals("user")) { // Attendees menu
             System.out.println("1. Display Events");
             System.out.println("2. Register Attendee");
             System.out.println("3. Exit");
@@ -557,6 +558,7 @@ public class EventRegistrationSystem {
             
             out.write(str + '\n');
             out.close();
+            br.close();
         }
  
 
@@ -623,7 +625,3 @@ public class EventRegistrationSystem {
         } 
         
     }
-
-    //add append file here
-
-
